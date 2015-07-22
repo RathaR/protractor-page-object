@@ -1,0 +1,30 @@
+{
+  "name": "protractor-page-object",
+  "version": "0.0.1",
+  "description": "Page object pattern implemantation for protractor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RathaR/protractor-page-object.git"
+  },
+  "keywords": [
+    "protractor",
+    "page-object"
+  ],
+  "author": "Ivan Pecharitsa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RathaR/protractor-page-object/issues"
+  },
+  "homepage": "https://github.com/RathaR/protractor-page-object#readme",
+  "dependencies": {
+    "lodash": "^3.10.0"
+  },
+  "devDependencies": {
+    "protractor": "^2.1.0",
+    "tsc": "^1.20150623.0"
+  }
+}
