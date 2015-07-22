@@ -1,3 +1,11 @@
+
+# TypeScript build and typing dir
+build
+src/typings
+
+# WebStorm project files
+.idea/
+
 # Logs
 logs
 *.log
