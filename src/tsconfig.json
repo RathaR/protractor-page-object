@@ -2,7 +2,7 @@
   "compilerOptions": {
     "removeComments": true,
     "module": "commonjs",
-    "out": "../build/E2ESpec.js",
+    "out": "build/E2ESpec.js",
     "sourceMap": true
   }
 }
