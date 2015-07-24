@@ -3,16 +3,15 @@ module Core {
     export interface IElementLocator {
         context : protractor.ElementFinder,
         locator? : webdriver.Locator
-
     }
 
-    export interface IElementConstructor {
-        new (locator: IElementLocator)
+    export interface IElementConstructor<TElement> {
+        new (locator: IElementLocator) : TElement
     }
 
-    export interface IPropertyLocator {
+    export interface IPropertyLocator<TProperty> {
         locator: webdriver.Locator,
-        type: IElementConstructor
+        type: IElementConstructor<TProperty>
     }
 
     export class BaseElement {

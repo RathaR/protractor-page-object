@@ -1,13 +1,13 @@
 module Core {
-    export interface IListItemLocator {
+    export interface IListItemLocator<TListItem> {
         locator: webdriver.Locator,
-        type?: IElementConstructor
+        type: IElementConstructor<TListItem>
     }
     export class BaseElementList<TListItem> extends BaseElement {
-        private itemLocator: IListItemLocator;
+        private itemLocator: IListItemLocator<TListItem>;
 
         private wrapItem(elementFinder: protractor.ElementFinder): TListItem {
-            var ctor = this.itemLocator.type || Core.BaseElement;
+            var ctor = this.itemLocator.type;
             return new ctor({context: elementFinder});
         }
 
@@ -24,16 +24,16 @@ module Core {
             return this.wrapItem(element);
         }
 
-        //toArray(): webdriver.promise.Promise<TListItem[]> {
-        //    var finders = this.all().asElementFinders_();
-        //    return finders.then((finders) => {
-        //        return finders.map((elementFinder) => {
-        //            return this.wrapItem(elementFinder)
-        //        });
-        //    });
-        //}
+        toArray(): webdriver.promise.Promise<TListItem[]> {
+            var finders = this.all().asElementFinders_();
+            return finders.then((finders) => {
+                return finders.map((elementFinder) => {
+                    return this.wrapItem(elementFinder)
+                });
+            });
+        }
 
-        constructor(locator: IElementLocator, itemLocator: IListItemLocator) {
+        constructor(locator: IElementLocator, itemLocator: IListItemLocator<TListItem>) {
             super(locator);
             this.itemLocator = itemLocator;
         }
