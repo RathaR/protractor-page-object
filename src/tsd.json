@@ -13,6 +13,9 @@
     },
     "selenium-webdriver/selenium-webdriver.d.ts": {
       "commit": "efc57a6eb7b4d0747894fc106b9dd87e45a8d183"
+    },
+    "lodash/lodash.d.ts": {
+      "commit": "977da240f263e88215a27cb44f2e31524ca07135"
     }
   }
 }
