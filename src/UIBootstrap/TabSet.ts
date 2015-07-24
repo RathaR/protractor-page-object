@@ -1,4 +1,4 @@
-///<reference path="../core/BaseElement.ts"/>
+///<reference path="../Core/BaseElement.ts"/>
 module UIBootstrap {
     export class TabSet<THeader,TContent> extends Core.BaseElement {
         protected headerProperty: Core.IPropertyLocator<THeader>;
