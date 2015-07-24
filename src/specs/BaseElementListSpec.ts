@@ -11,12 +11,27 @@ describe('Test suite for BaseElementList class', () => {
     });
 
     it('should get typed list item', () => {
-        var list: Core.BaseElementList<Core.BaseElement> = new Core.BaseElementList({
+        var list = new Core.BaseElementList({
             locator: by.css('body > div:nth-child(3) > div > div > div'),
             context: null
         }, {
             locator: by.css('section')
         });
-        expect(list.item(0).element().isDisplayed()).toBeTruthy();
+        expect(list.item(1).element().isDisplayed()).toBeTruthy();
+    });
+
+    it('should get typed list item from array', () => {
+        var list = new Core.BaseElementList<Core.BaseElement>({
+            locator: by.css('body > div:nth-child(3) > div > div > div'),
+            context: null
+        }, {
+            locator: by.css('section')
+        });
+        var arr = list.toArray();
+        arr.then((arr) => {
+            arr.forEach((finder) => {
+                expect(finder.isPresent()).toBeTruthy();
+            });
+        });
     });
 });

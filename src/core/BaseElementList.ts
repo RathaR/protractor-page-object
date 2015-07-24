@@ -6,6 +6,11 @@ module Core {
     export class BaseElementList<TListItem extends BaseElement> extends BaseElement {
         private itemLocator: IListItemLocator;
 
+        private wrapItem(finder: protractor.ElementFinder): TListItem {
+            var ctor = this.itemLocator.type || Core.BaseElement;
+            return new ctor({context: finder});
+        }
+
         all(): protractor.ElementArrayFinder {
             return this.element().all(this.itemLocator.locator);
         }
@@ -16,8 +21,16 @@ module Core {
 
         item(index: number): TListItem {
             var element = this.get(index);
-            var ctor = this.itemLocator.type || Core.BaseElement;
-            return new ctor({context: element});
+            return this.wrapItem(element);
+        }
+
+        toArray(): webdriver.promise.Promise<TListItem[]> {
+            var finders = this.all().asElementFinders_();
+            return finders.then((finders) => {
+                return finders.map((finder)=> {
+                    return this.wrapItem(finder)
+                });
+            });
         }
 
         constructor(locator: IElementLocator, itemLocator: IListItemLocator) {
