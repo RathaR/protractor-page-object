@@ -1,14 +1,14 @@
 module Core {
     export interface IListItemLocator {
         locator: webdriver.Locator,
-        type?: {new(locator: IElementLocator)}
+        type?: IElementConstructor
     }
-    export class BaseElementList<TListItem extends BaseElement> extends BaseElement {
+    export class BaseElementList<TListItem> extends BaseElement {
         private itemLocator: IListItemLocator;
 
-        private wrapItem(finder: protractor.ElementFinder): TListItem {
+        private wrapItem(elementFinder: protractor.ElementFinder): TListItem {
             var ctor = this.itemLocator.type || Core.BaseElement;
-            return new ctor({context: finder});
+            return new ctor({context: elementFinder});
         }
 
         all(): protractor.ElementArrayFinder {
@@ -24,14 +24,14 @@ module Core {
             return this.wrapItem(element);
         }
 
-        toArray(): webdriver.promise.Promise<TListItem[]> {
-            var finders = this.all().asElementFinders_();
-            return finders.then((finders) => {
-                return finders.map((finder)=> {
-                    return this.wrapItem(finder)
-                });
-            });
-        }
+        //toArray(): webdriver.promise.Promise<TListItem[]> {
+        //    var finders = this.all().asElementFinders_();
+        //    return finders.then((finders) => {
+        //        return finders.map((elementFinder) => {
+        //            return this.wrapItem(elementFinder)
+        //        });
+        //    });
+        //}
 
         constructor(locator: IElementLocator, itemLocator: IListItemLocator) {
             super(locator);

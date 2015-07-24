@@ -1,12 +1,22 @@
 module Core {
+
     export interface IElementLocator {
         context : protractor.ElementFinder,
         locator? : webdriver.Locator
 
     }
 
+    export interface IElementConstructor {
+        new (locator: IElementLocator)
+    }
+
+    export interface IPropertyLocator {
+        locator: webdriver.Locator,
+        type: IElementConstructor
+    }
+
     export class BaseElement {
-        private locator: IElementLocator;
+        protected locator: IElementLocator;
 
         isDisplayed() {
             return this.element().isDisplayed();
@@ -14,6 +24,14 @@ module Core {
 
         isPresent() {
             return this.element().isPresent();
+        }
+
+        getText() {
+            return this.element().getText();
+        }
+
+        click() {
+            return this.element().click();
         }
 
         element(sublocator?: webdriver.Locator): protractor.ElementFinder {
