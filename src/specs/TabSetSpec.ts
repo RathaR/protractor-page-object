@@ -2,7 +2,7 @@ describe('TabSet specs', () => {
     beforeEach(() => {
         browser.get('https://angular-ui.github.io/bootstrap/');
     });
-    it('should create TabSet', () => {
+    it('should create TabSet with typed header and content', () => {
 
         var tabset = new UIBootstrap.TabSet<Core.BaseElement, Core.BaseElement>({
             context: element(by.css('body')),

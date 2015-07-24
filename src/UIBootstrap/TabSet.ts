@@ -1,8 +1,8 @@
 ///<reference path="../core/BaseElement.ts"/>
 module UIBootstrap {
     export class TabSet<THeader,TContent> extends Core.BaseElement {
-        private headerProperty: Core.IPropertyLocator<THeader>;
-        private contentProperty: Core.IPropertyLocator<TContent>;
+        protected headerProperty: Core.IPropertyLocator<THeader>;
+        protected contentProperty: Core.IPropertyLocator<TContent>;
 
         content(): TContent {
             var ctor = this.contentProperty.type;
@@ -13,12 +13,12 @@ module UIBootstrap {
 
         heading(): Core.BaseElementList<THeader> {
             var headerLocator = this.headerProperty.locator;
-            //var context = this.element().all(headerLocator).get(index);
-            //var listItemLocator = {context: headerLocator, type : THeader};
-            return new Core.BaseElementList<THeader>(this.locator, {
-                locator: headerLocator,
-                type: this.headerProperty.type
-            });
+            return new Core.BaseElementList<THeader>(
+                this.locator,
+                {
+                    locator: headerLocator,
+                    type: this.headerProperty.type
+                });
         }
 
         constructor(locator: Core.IElementLocator, headerType: Core.IElementConstructor<THeader>, contentType: Core.IElementConstructor<TContent>) {
