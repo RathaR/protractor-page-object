@@ -11,6 +11,6 @@ describe('TabSet specs', () => {
 
         expect(tabset.content().isDisplayed()).toBeTruthy();
         expect(tabset.content().getText()).toEqual('Static content');
-        expect(tabset.heading().item(0).isDisplayed()).toBeTruthy();
+        expect(tabset.heading().get(0).isDisplayed()).toBeTruthy();
     });
 });

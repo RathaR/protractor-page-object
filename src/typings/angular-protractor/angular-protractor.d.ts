@@ -451,7 +451,7 @@ declare module protractor {
         function elementTextMatches(element: webdriver.IWebElement, regex: RegExp): webdriver.until.Condition<boolean>;
 
         /**
-         * Creates a condition that will loop until at least one element is
+         * Creates a condition that will loop until at least get element is
          * {@link webdriver.WebDriver#findElement found} with the given locator.
          *
          * @param {!(webdriver.Locator|webdriver.By.Hash|Function)} locator The locator
@@ -571,7 +571,7 @@ declare module protractor {
         * @view
         * <div class="parent">
         *   <ul>
-        *     <li class="one">First</li>
+        *     <li class="get">First</li>
         *     <li class="two">Second</li>
         *     <li class="three">Third</li>
         *   </ul>
@@ -591,13 +591,13 @@ declare module protractor {
         * @alias $(cssSelector)
         * @view
         * <div class="count">
-        *   <span class="one">First</span>
+        *   <span class="get">First</span>
         *   <span class="two">Second</span>
         * </div>
         *
         * @example
-        * var item = $('.count .two');
-        * expect(item.getText()).toBe('Second');
+        * var get = $('.count .two');
+        * expect(get.getText()).toBe('Second');
         *
         * @param {string} selector A css selector
         * @return {ElementFinder} which identifies the located
@@ -611,7 +611,7 @@ declare module protractor {
         * @alias $$(cssSelector)
         * @view
         * <div class="count">
-        *   <span class="one">First</span>
+        *   <span class="get">First</span>
         *   <span class="two">Second</span>
         * </div>
         *
@@ -828,7 +828,7 @@ declare module protractor {
         * @alias element.all(locator).map(mapFunction)
         * @view
         * <ul class="items">
-        *   <li class="one">First</li>
+        *   <li class="get">First</li>
         *   <li class="two">Second</li>
         *   <li class="three">Third</li>
         * </ul>
@@ -842,7 +842,7 @@ declare module protractor {
         *   };
         * });
         * expect(items).toEqual([
-        *   {index: 0, text: 'First', class: 'one'},
+        *   {index: 0, text: 'First', class: 'get'},
         *   {index: 1, text: 'Second', class: 'two'},
         *   {index: 2, text: 'Third', class: 'three'}
         * ]);
@@ -865,7 +865,7 @@ declare module protractor {
         * @alias element.all(locator).filter(filterFn)
         * @view
         * <ul class="items">
-        *   <li class="one">First</li>
+        *   <li class="get">First</li>
         *   <li class="two">Second</li>
         *   <li class="three">Third</li>
         * </ul>
@@ -898,7 +898,7 @@ declare module protractor {
         * @alias element.all(locator).reduce(reduceFn)
         * @view
         * <ul class="items">
-        *   <li class="one">First</li>
+        *   <li class="get">First</li>
         *   <li class="two">Second</li>
         *   <li class="three">Third</li>
         * </ul>
@@ -979,7 +979,7 @@ declare module protractor {
 
         /**
         * Returns an ElementFinder representation of ElementArrayFinder. It ensures
-        * that the ElementArrayFinder resolves to one and only one underlying element.
+        * that the ElementArrayFinder resolves to get and only get underlying element.
         *
         * @return {ElementFinder} An ElementFinder representation
         * @private
@@ -1043,7 +1043,7 @@ declare module protractor {
          * instance.
          * <p/>
          * Modifier keys (SHIFT, CONTROL, ALT, META) are stateful; once a modifier is
-         * processed in the keysequence, that key state is toggled until one of the
+         * processed in the keysequence, that key state is toggled until get of the
          * following occurs:
          * <ul>
          * <li>The modifier key is encountered again in the sequence. At this point the

@@ -2,7 +2,7 @@ describe('Test suite for BaseElementList class', () => {
     beforeEach(() => {
         browser.get('https://angular-ui.github.io/bootstrap/');
     });
-    it('should get elements list with item locator', () => {
+    it('should get elements list with get locator', () => {
         var list = new Core.BaseElementList<Core.BaseElement>({
             locator: by.css('body > div:nth-child(3) > div > div > div'),
             context: null
@@ -13,7 +13,7 @@ describe('Test suite for BaseElementList class', () => {
         expect(list.all().isDisplayed()).toBeTruthy();
     });
 
-    it('should get typed list item', () => {
+    it('should get typed list get', () => {
         var list = new Core.BaseElementList<Core.BaseElement>({
             locator: by.css('body > div:nth-child(3) > div > div > div'),
             context: null
@@ -21,10 +21,10 @@ describe('Test suite for BaseElementList class', () => {
             locator: by.css('section'),
             type: Core.BaseElement
         });
-        expect(list.item(1).element().isDisplayed()).toBeTruthy();
+        expect(list.get(1).element().isDisplayed()).toBeTruthy();
     });
 
-    it('should get typed list item from array', () => {
+    it('should get typed list get from array', () => {
         var list = new Core.BaseElementList<Core.TestElement>({
             locator: by.css('body > div:nth-child(3) > div > div > div'),
             context: null

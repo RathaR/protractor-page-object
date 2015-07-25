@@ -9,9 +9,18 @@ module Core {
         new (locator: IElementLocator) : TElement
     }
 
+    export interface IElementsListConstructor<TListItem> extends  IElementConstructor<TListItem> {
+        new (locator: IElementLocator, itemLocator: IListItemLocator) : BaseElementList<TListItem>
+    }
+
     export interface IPropertyLocator<TProperty> {
         locator: webdriver.Locator,
         type: IElementConstructor<TProperty>
+    }
+
+    export interface IListPropertyLocator<TListItem> {
+        locator: webdriver.Locator,
+        type: IElementsListConstructor<TListItem>
     }
 
     export class BaseElement {
