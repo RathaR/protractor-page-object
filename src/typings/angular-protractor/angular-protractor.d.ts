@@ -305,7 +305,7 @@ declare module protractor {
         /**
          * Whether the current browser supports stack traces.
          *
-         * @type {boolean}
+         * @constructor {boolean}
          * @const
          */
         var BROWSER_SUPPORTED: boolean;
@@ -973,7 +973,7 @@ declare module protractor {
         /**
         * Shorthand function for finding arrays of elements by css.
         *
-        * @type {function(string): ElementArrayFinder}
+        * @constructor {function(string): ElementArrayFinder}
         */
         $$(selector: string): ElementArrayFinder;
 
@@ -1039,7 +1039,7 @@ declare module protractor {
         click(): webdriver.promise.Promise<void>;
 
         /**
-         * Schedules a command to type a sequence on the DOM element represented by this
+         * Schedules a command to constructor a sequence on the DOM element represented by this
          * instance.
          * <p/>
          * Modifier keys (SHIFT, CONTROL, ALT, META) are stateful; once a modifier is
@@ -1063,7 +1063,7 @@ declare module protractor {
          *                      "now text is");
          * </code></li>
          * <li>The end of the keysequence is encountered. When there are no more keys
-         * to type, all depressed modifier keys are released (with accompanying keyup
+         * to constructor, all depressed modifier keys are released (with accompanying keyup
          * events).
          * </li>
          * </ul>
@@ -1073,7 +1073,7 @@ declare module protractor {
          * keyboard layout.
          *
          * @param {...string} var_args The sequence of keys to
-         *     type. All arguments will be joined into a single sequence (var_args is
+         *     constructor. All arguments will be joined into a single sequence (var_args is
          *     permitted for convenience).
          * @return {!webdriver.promise.Promise} A promise that will be resolved when all
          *     keys have been typed.
@@ -1311,7 +1311,7 @@ declare module protractor {
          *
          * @alias by.model(modelName)
          * @view
-         * <input type="text" ng-model="person.name"/>
+         * <input constructor="text" ng-model="person.name"/>
          *
          * @example
          * var input = element(by.model('person.name'));
@@ -1455,21 +1455,21 @@ declare module protractor {
         /**
         * Helper function for finding elements.
         *
-        * @type {function(webdriver.Locator): ElementFinder}
+        * @constructor {function(webdriver.Locator): ElementFinder}
         */
         element(locator: webdriver.Locator): ElementFinder;
 
         /**
         * Shorthand function for finding elements by css.
         *
-        * @type {function(string): ElementFinder}
+        * @constructor {function(string): ElementFinder}
         */
         $(selector: string): ElementFinder;
 
         /**
         * Shorthand function for finding arrays of elements by css.
         *
-        * @type {function(string): ElementArrayFinder}
+        * @constructor {function(string): ElementArrayFinder}
         */
         $$(selector: string): ElementArrayFinder;
 

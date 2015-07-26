@@ -1,18 +1,5 @@
 module Core {
 
-    export interface IListItemLocator {
-        locator: webdriver.Locator,
-        type: any
-    }
-
-    //export interface IElementListItemLocator<TListItem> extends IListItemLocator {
-    //    type: IElementConstructor<TListItem>
-    //}
-    //
-    //export interface IElementsListListItemLocator<TListItem> extends IListItemLocator {
-    //    type: IElementsListConstructor<TListItem>
-    //}
-
     export class BaseElementList<TListItem> extends BaseElement {
         private itemLocator: IListItemLocator;
 
