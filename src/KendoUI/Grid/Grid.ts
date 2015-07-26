@@ -3,54 +3,54 @@
 module KendoUI {
 
     export class Grid extends Core.BaseElement {
-        protected headerProperty: Core.IObjectProperty;
-        protected contentProperty: Core.IObjectProperty;
-        protected pagerProperty: Core.IObjectProperty;
 
-
-        protected gridRowLocator: webdriver.Locator;
-
-        rows() {
+        get rows() {
+            var contentProp = this.getProperty('content');
             return new Core.BaseElementList<GridRow>({
                     context: this.element(),
-                    locator: this.contentProperty.locator
+                    locator: contentProp.locator
                 }, {
-                    locator: this.gridRowLocator,
-                    type: GridRow
+                    locator: contentProp.item.locator,
+                    constructor: contentProp.item.constructor
                 }
             );
         }
 
-        header() {
+        get header() {
+            var property = this.getProperty('header');
             return new GridHeader({
                 context: this.element(),
-                locator: this.headerProperty.locator
+                locator: property.locator
             });
         }
 
-        pager() {
+
+        get pager() {
+            var property = this.getProperty('pager');
             return new GridPager({
                 context: this.element(),
-                locator: this.pagerProperty.locator
+                locator: property.locator
             })
         }
 
         constructor(locator: Core.IElementLocator) {
             super(locator);
-            this.headerProperty = {
+            this.addProperty('header', {
                 locator: by.css('.k-grid-header'),
                 type: GridHeader
-            };
-            this.contentProperty = {
+            });
+            this.addProperty('content', {
                 locator: by.css('.k-grid-content tbody[role=rowgroup]'),
-                type: Core.BaseElementList
-            };
-            this.pagerProperty = {
+                type: Core.BaseElementList,
+                item: {
+                    locator: by.css('tr[role=row][data-uid]'),
+                    constructor: GridRow
+                }
+            });
+            this.addProperty('pager', {
                 type: GridPager,
                 locator: by.css('.k-pager-wrap.k-grid-pager[data-role=pager]')
-            };
-
-            this.gridRowLocator = by.css('tr[role=row][data-uid]');
+            });
 
         }
     }

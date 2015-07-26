@@ -1,6 +1,24 @@
+///<reference path="../typings/tsd.d.ts" />
 module Core {
     export class BaseElement {
+        private properties: Object;
+
         protected locator: IElementLocator;
+
+        protected getProperty(id: string) {
+            var property = this.properties[id];
+            if (!property) {
+                throw new Error('Can not find property: ' + id + '. You must use BaseElement.addProperty to add object property configuration');
+            }
+            return property;
+        }
+
+        protected addProperty(id: string, prop: IObjectProperty) {
+            if (this.properties[id]) {
+                throw new Error(id + ' property already exist!');
+            }
+            this.properties[id] = prop;
+        }
 
         isDisplayed() {
             return this.element().isDisplayed();
@@ -30,6 +48,7 @@ module Core {
 
         constructor(locator: IElementLocator) {
             this.locator = locator;
+            this.properties = Object.create(null);
         }
     }
 }

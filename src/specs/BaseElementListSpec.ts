@@ -8,7 +8,7 @@ describe('Test suite for BaseElementList class', () => {
             context: null
         }, {
             locator: by.css('section'),
-            type : Core.BaseElement
+            constructor : Core.BaseElement
         });
         expect(list.all().isDisplayed()).toBeTruthy();
     });
@@ -19,7 +19,7 @@ describe('Test suite for BaseElementList class', () => {
             context: null
         }, {
             locator: by.css('section'),
-            type: Core.BaseElement
+            constructor: Core.BaseElement
         });
         expect(list.get(1).element().isDisplayed()).toBeTruthy();
     });
@@ -30,7 +30,7 @@ describe('Test suite for BaseElementList class', () => {
             context: null
         }, {
             locator: by.css('section'),
-            type: Core.TestElement
+            constructor: Core.TestElement
         });
         var arr = list.toArray();
         arr.then((arr) => {

@@ -2,20 +2,19 @@
 ///<reference path="../Core/IObjectProperty"/>
 module AngularStrap {
     export class Modal<TContent> extends Core.BaseElement {
-        protected contentProperty: Core.IObjectProperty;
 
-        content(): TContent {
-            var ctor = this.contentProperty.constructor;
-            var contentLocator = this.contentProperty.locator;
-            return new ctor({context: this.element(), locator: contentLocator});
+        get content(): TContent {
+            var property = this.getProperty('content');
+            var ctor = property.constructor;
+            return new ctor({context: this.element(), locator: property.locator});
         }
 
         constructor(locator: Core.IElementLocator, contentType) {
             super(locator);
-            this.contentProperty = {
+            this.addProperty('content', {
                 locator: by.css('.modal-content'),
                 constructor: contentType
-            }
+            });
         }
     }
 }

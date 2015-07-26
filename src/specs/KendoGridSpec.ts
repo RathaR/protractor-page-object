@@ -10,30 +10,30 @@ describe('Kendo grid specs', () => {
     });
 
     it('should get grid header', ()=> {
-        expect(grid.header().isDisplayed()).toBeTruthy();
+        expect(grid.header.isDisplayed()).toBeTruthy();
     });
 
     it('should get columns', ()=> {
         var columns = ['Contact Name', 'Contact Title', 'Company Name', 'Country'];
-        var header = grid.header();
+        var header = grid.header;
         columns.forEach((column, index) => {
-            expect(header.columns().get(index).getText()).toEqual(column);
+            expect(header.columns.get(index).getText()).toEqual(column);
         });
     });
 
     it('should get rows', ()=> {
-        var cell = grid.rows().get(0).cell(0);
+        var cell = grid.rows.get(0).cell(0);
         expect(cell.isDisplayed()).toBeTruthy();
     });
 
     it('should get rows', ()=> {
-        var cell = grid.rows().get(0).cells.get(0);
+        var cell = grid.rows.get(0).cells.get(0);
         expect(cell.isDisplayed()).toBeTruthy();
     });
 
     it('should get pager', () => {
-        expect(grid.pager().isDisplayed()).toBeTruthy();
-        expect(grid.pager().refreshBtn().isDisplayed()).toBeTruthy();
+        expect(grid.pager.isDisplayed()).toBeTruthy();
+        expect(grid.pager.refreshBtn().isDisplayed()).toBeTruthy();
     });
 
 });

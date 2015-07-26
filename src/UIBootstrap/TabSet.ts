@@ -1,36 +1,31 @@
 ///<reference path="../Core/BaseElement.ts"/>
 module UIBootstrap {
     export class TabSet<THeader,TContent> extends Core.BaseElement {
-        protected headerProperty: Core.IObjectProperty;
-        protected contentProperty: Core.IObjectProperty;
 
         content(): TContent {
-            var ctor = this.contentProperty.constructor;
-            var locator = this.contentProperty.locator;
-            var context = this.element();
-            return new ctor({context: context, locator: locator});
+            var prop = this.getProperty('content');
+            return new prop.constructor({context: this.element(), locator: prop.locator});
         }
 
-        heading() {
-            var headerLocator = this.headerProperty.locator;
-            return new Core.BaseElementList<THeader>(
-                this.locator,
-                {
-                    locator: headerLocator,
-                    type: this.headerProperty.constructor
-                });
+        heading(): Core.BaseElementList<THeader> {
+            var headingProp = this.getProperty('heading');
+            return new headingProp.constructor(this.locator, headingProp.item);
         }
 
         constructor(locator: Core.IElementLocator, headerType, contentType) {
             super(locator);
-            this.contentProperty = {
+            this.addProperty('content', {
                 locator: by.css('.tab-content .tab-pane'),
                 constructor: contentType
-            };
-            this.headerProperty = {
-                locator: by.css('a[tab-heading-transclude]'),
-                constructor: headerType
-            };
+            });
+            this.addProperty('heading', {
+                locator: this.locator.locator,
+                constructor: Core.BaseElementList,
+                item: {
+                    locator: by.css('a[tab-heading-transclude]'),
+                    constructor: headerType
+                }
+            });
         }
 
     }

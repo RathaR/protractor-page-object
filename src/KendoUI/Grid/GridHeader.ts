@@ -2,23 +2,28 @@
 ///<reference path="../../Core/BaseElementList.ts"/>
 module KendoUI {
     export class GridHeader extends Core.BaseElement {
-        protected headerCellLocator: webdriver.Locator;
-        protected headerRowLocator: webdriver.Locator;
 
-        columns() {
+        get columns() {
+            var prop = this.getProperty('columns');
             return new Core.BaseElementList<Core.BaseElement>({
                 context: this.element(),
-                locator: this.headerRowLocator
+                locator: prop.locator
             }, {
-                locator: this.headerCellLocator,
-                type: Core.BaseElement
+                locator: prop.item.locator,
+                constructor: prop.item.constructor
             })
         }
 
         constructor(locator: Core.IElementLocator) {
             super(locator);
-            this.headerCellLocator = by.css('th[role=columnheader]');
-            this.headerRowLocator = by.css('thead tr[role=row]');
+            this.addProperty('columns', {
+                locator: by.css('thead tr[role=row]'),
+                constructor: Core.BaseElementList,
+                item: {
+                    locator: by.css('th[role=columnheader]'),
+                    constructor: Core.BaseElement
+                }
+            });
         }
 
     }

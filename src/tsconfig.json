@@ -3,6 +3,7 @@
     "removeComments": true,
     "module": "commonjs",
     "out": "../build/E2ESpec.js",
-    "sourceMap": true
+    "sourceMap": true,
+    "target": "ES5"
   }
 }

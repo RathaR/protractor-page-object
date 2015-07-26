@@ -3,18 +3,18 @@
 
 module KendoUI {
     export class GridPager extends Core.BaseElement {
-        protected refreshBtnProperty: Core.IObjectProperty;
 
         refreshBtn() {
+            var prop = this.getProperty('refreshBtn');
             return new Core.BaseButton({
                 context: this.element(),
-                locator: this.refreshBtnProperty.locator
+                locator: prop.locator
             });
         }
 
         constructor(locator: Core.IElementLocator) {
             super(locator);
-            this.refreshBtnProperty = {locator: by.css('.k-pager-refresh'), type: Core.BaseButton}
+            this.addProperty('refreshBtn', {locator: by.css('.k-pager-refresh'), type: Core.BaseButton});
         }
     }
 }

@@ -4,7 +4,7 @@ module Core {
         private itemLocator: IListItemLocator;
 
         private wrapItem(elementFinder: protractor.ElementFinder): TListItem {
-            var ctor = this.itemLocator.type;
+            var ctor = this.itemLocator.constructor;
             return new ctor({context: elementFinder});
         }
 
