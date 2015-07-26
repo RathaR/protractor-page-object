@@ -4,7 +4,7 @@
 module KendoUI {
     export class GridPager extends Core.BaseElement {
 
-        refreshBtn() {
+        get refreshBtn() {
             var prop = this.getProperty('refreshBtn');
             return new Core.BaseButton({
                 context: this.element(),

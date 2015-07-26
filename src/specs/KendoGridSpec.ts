@@ -33,7 +33,7 @@ describe('Kendo grid specs', () => {
 
     it('should get pager', () => {
         expect(grid.pager.isDisplayed()).toBeTruthy();
-        expect(grid.pager.refreshBtn().isDisplayed()).toBeTruthy();
+        expect(grid.pager.refreshBtn.isDisplayed()).toBeTruthy();
     });
 
 });
