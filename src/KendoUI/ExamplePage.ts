@@ -9,26 +9,30 @@ module KendoUI {
                 locator: prop.locator
             })
         }
+        //
+        //get exampleView() {
+        //    var prop = this.getProperty('exampleView');
+        //    return new Core.BaseElement({
+        //        context: this.element(),
+        //        locator: prop.locator,
+        //        properties: prop.properties
+        //    })
+        //}
 
-        get exampleView() {
-            var prop = this.getProperty('exampleView');
-            return new Core.BaseElement({
-                context: this.element(),
-                locator: prop.locator,
-                properties: prop.properties
-            })
-        }
-
-        constructor(baseUrl: string) {
-            this.path = "grid";
-            super(baseUrl);
+        constructor(url: string) {
+            super(url);
             this.addProperty('exampleView', {
                 locator: by.css('#main'),
                 constructor: Core.BaseElement,
+                //new short 'prop' syntax example
                 properties: {
                     'title': {
                         locator: by.css('#exampleTitle'),
                         constructor: Core.BaseElement
+                    },
+                    'grid' : {
+                        locator: by.css('#exampleWrap'),
+                        constructor: Grid
                     }
                 }
             });

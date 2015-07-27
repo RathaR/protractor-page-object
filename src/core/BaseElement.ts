@@ -20,6 +20,10 @@ module Core {
             this.properties[id] = prop;
         }
 
+        create<TObject>(constructor: any): TObject {
+            return new constructor({context: this.element()});
+        }
+
         isDisplayed() {
             return this.element().isDisplayed();
         }
@@ -46,9 +50,26 @@ module Core {
             return sublocator ? contextElement.element(sublocator) : contextElement;
         }
 
-        prop(id: string): any {
-            var prop = this.getProperty(id);
-            return new prop.constructor({context: this.element(), locator: prop.locator});
+        prop<TProp extends BaseElement>(...chain: string[]): TProp {
+            var call = (object: BaseElement, args) => {
+                return object.prop.apply(object, args);
+            };
+            var propId = chain.shift();
+            var prop = this.getProperty(propId);
+            if(!chain.length) {
+                return new prop.constructor({
+                    context: this.element(),
+                    locator: prop.locator,
+                    properties: prop.properties
+                })
+            } else {
+                return call(new prop.constructor({
+                    context: this.element(),
+                    locator: prop.locator,
+                    properties: prop.properties
+                }), chain);
+            }
+            //return new prop.constructor({context: this.element(), locator: prop.locator, properties: prop.properties});
         }
 
         constructor(locator: IElementLocator) {
@@ -56,12 +77,7 @@ module Core {
             this.properties = Object.create(null);
             if (locator.properties) {
                 for (var prop in locator.properties) {
-                    var value = locator.properties[prop];
                     this.properties[prop] = locator.properties[prop];
-                    //var getter = () => {
-                    //    return new value.constructor({context: this.element(), locator: value.locator});
-                    //};
-                    //this[prop] = getter;
                 }
             }
         }

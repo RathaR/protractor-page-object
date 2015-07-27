@@ -2,6 +2,7 @@ module Core {
     export interface IObjectProperty {
         locator: webdriver.Locator,
         constructor: any,
-        item?: IListItemLocator
+        item?: IListItemLocator,
+        properties?: {[propertyName: string] : IObjectProperty}
     }
 }

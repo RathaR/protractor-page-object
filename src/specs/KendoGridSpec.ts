@@ -1,19 +1,28 @@
 describe('Kendo grid specs', () => {
-    var grid,
+    var grid: KendoUI.Grid,
         app: KendoUI.KendoApp,
-        page: KendoUI.ExamplePage;
+        page: KendoUI.ExamplePage,
+        title: Core.BaseElement;
     beforeEach(()=> {
         app = new KendoUI.KendoApp();
-        page = app.page<KendoUI.ExamplePage>(KendoUI.ExamplePage);
-        grid = new KendoUI.Grid({
-            locator: by.css('#grid'),
-            context: element(by.css('body'))
-        });
+        page = app.page<KendoUI.ExamplePage>('grid', KendoUI.ExamplePage);
+        //new short 'prop' syntax example
+        grid = page.prop<KendoUI.Grid>('exampleView', 'grid');
+        //grid = page.prop<Core.BaseElement>('exampleView').prop<KendoUI.Grid>('grid');
+        title = page.prop<Core.BaseElement>('exampleView').prop<Core.BaseElement>('title');
     });
 
     it('should get example view', () => {
-        expect(page.exampleView.prop('title').isDisplayed());
-        expect(page.exampleView.isDisplayed()).toBeTruthy();
+        expect(page.prop<Core.BaseElement>('exampleView').isDisplayed()).toBeTruthy();
+    });
+
+    it('should display title', () => {
+        expect(title.isDisplayed()).toBeTruthy();
+        expect(title.getText()).toEqual('Grid / Basic usage');
+    });
+
+    it('should display grid', () => {
+        expect(grid.isDisplayed()).toBeTruthy();
     });
     it('should get grid header', ()=> {
         expect(grid.header.isDisplayed()).toBeTruthy();

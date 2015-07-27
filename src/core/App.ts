@@ -2,9 +2,9 @@ module Core {
     export class App {
         private url: string;
 
-        page<TPage>(constructor?: any) : TPage {
+        page<TPage>(pagePath: string, constructor?: any): TPage {
             constructor = constructor || BasePage;
-            return new constructor(this.url);
+            return new constructor([this.url, pagePath].join('/'));
         }
 
         constructor(url: string) {
