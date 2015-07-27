@@ -1,4 +1,4 @@
-describe('TabSet specs', () => {
+xdescribe('TabSet specs', () => {
     beforeEach(() => {
         browser.get('https://angular-ui.github.io/bootstrap/');
     });

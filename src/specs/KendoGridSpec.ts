@@ -1,14 +1,20 @@
 describe('Kendo grid specs', () => {
-    var grid: KendoUI.Grid;
+    var grid,
+        app: KendoUI.KendoApp,
+        page: KendoUI.ExamplePage;
     beforeEach(()=> {
-        browser.ignoreSynchronization = true;
-        browser.get('http://demos.telerik.com/kendo-ui/grid/index');
+        app = new KendoUI.KendoApp();
+        page = app.page<KendoUI.ExamplePage>(KendoUI.ExamplePage);
         grid = new KendoUI.Grid({
             locator: by.css('#grid'),
             context: element(by.css('body'))
         });
     });
 
+    it('should get example view', () => {
+        expect(page.exampleView.prop('title').isDisplayed());
+        expect(page.exampleView.isDisplayed()).toBeTruthy();
+    });
     it('should get grid header', ()=> {
         expect(grid.header.isDisplayed()).toBeTruthy();
     });

@@ -46,9 +46,24 @@ module Core {
             return sublocator ? contextElement.element(sublocator) : contextElement;
         }
 
+        prop(id: string): any {
+            var prop = this.getProperty(id);
+            return new prop.constructor({context: this.element(), locator: prop.locator});
+        }
+
         constructor(locator: IElementLocator) {
             this.locator = locator;
             this.properties = Object.create(null);
+            if (locator.properties) {
+                for (var prop in locator.properties) {
+                    var value = locator.properties[prop];
+                    this.properties[prop] = locator.properties[prop];
+                    //var getter = () => {
+                    //    return new value.constructor({context: this.element(), locator: value.locator});
+                    //};
+                    //this[prop] = getter;
+                }
+            }
         }
     }
 }
