@@ -14,7 +14,7 @@ module KendoUI {
 
         constructor(locator: Core.IElementLocator) {
             super(locator);
-            this.addProperty('refreshBtn', {locator: by.css('.k-pager-refresh'), type: Core.BaseButton});
+            this.addProperty('refreshBtn', {locator: by.css('.k-pager-refresh'), constructor: Core.BaseButton});
         }
     }
 }

@@ -37,18 +37,18 @@ module KendoUI {
             super(locator);
             this.addProperty('header', {
                 locator: by.css('.k-grid-header'),
-                type: GridHeader
+                constructor: GridHeader
             });
             this.addProperty('content', {
                 locator: by.css('.k-grid-content tbody[role=rowgroup]'),
-                type: Core.BaseElementList,
+                constructor: Core.BaseElementList,
                 item: {
                     locator: by.css('tr[role=row][data-uid]'),
                     constructor: GridRow
                 }
             });
             this.addProperty('pager', {
-                type: GridPager,
+                constructor: GridPager,
                 locator: by.css('.k-pager-wrap.k-grid-pager[data-role=pager]')
             });
 

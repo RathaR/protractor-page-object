@@ -12,6 +12,16 @@ module Core {
             return this.element().all(this.itemLocator.locator);
         }
 
+        asText() {
+            return this.all().map((item) => {
+                return item.getText();
+            })
+        }
+
+        count() {
+            return this.all().count();
+        }
+
         get(index: number): TListItem {
             var element = this.all().get(index);
             return this.wrapItem(element);

@@ -7,9 +7,8 @@ gulp.task('default', function () {
             out: 'E2ESpec.js',
             removeComments: true,
             module: "commonjs",
-            sourceMap: true,
-            target: "ES5"
-
+            target: "ES5",
+            sourceMap: true
         }));
     return tsResult.js.pipe(gulp.dest('build'));
 });

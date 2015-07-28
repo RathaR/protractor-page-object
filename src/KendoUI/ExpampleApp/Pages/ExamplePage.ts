@@ -9,15 +9,6 @@ module KendoUI {
                 locator: prop.locator
             })
         }
-        //
-        //get exampleView() {
-        //    var prop = this.getProperty('exampleView');
-        //    return new Core.BaseElement({
-        //        context: this.element(),
-        //        locator: prop.locator,
-        //        properties: prop.properties
-        //    })
-        //}
 
         constructor(url: string) {
             super(url);
