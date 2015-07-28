@@ -1,5 +1,5 @@
-///<reference path="../core/BaseElement.ts"/>
-///<reference path="../core/BasePage.ts"/>
+///<reference path="../../../core/BaseElement.ts"/>
+///<reference path="../../../core/BasePage.ts"/>
 module KendoUI {
     export class ExamplePage extends Core.BasePage {
         get sideBar() {

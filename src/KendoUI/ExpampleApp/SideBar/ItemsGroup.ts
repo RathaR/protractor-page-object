@@ -1,3 +1,4 @@
+///<reference path="../../../core/BaseElementList.ts" />
 module KendoUI {
     export class ItemsGroup extends Core.BaseElementList<Core.BaseElement> {
 
