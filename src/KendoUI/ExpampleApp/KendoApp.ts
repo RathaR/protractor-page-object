@@ -1,4 +1,4 @@
-///<reference path="../../core/App.ts"/>
+///<reference path="../../Core/App.ts"/>
 module KendoUI {
     export class DemoApp extends Core.App {
         constructor() {
