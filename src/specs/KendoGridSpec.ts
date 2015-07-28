@@ -109,6 +109,11 @@ describe('Kendo grid specs', () => {
                 expect(cell.isDisplayed()).toBeTruthy();
             });
 
+            it('should get data from cell', () => {
+                var cell = grid.rows.get(0).cell(0);
+                expect(cell.getText()).toEqual('Maria Anders');
+            });
+
             it('should get rows and cells count', ()=> {
                 expect(grid.rows.count()).toEqual(20);
                 expect(grid.rows.get(0).cells.count()).toEqual(4);
@@ -117,7 +122,7 @@ describe('Kendo grid specs', () => {
             it('should get pager', () => {
                 expect(grid.pager.isDisplayed()).toBeTruthy();
                 expect(grid.prop<Core.BaseElement>('pager').isDisplayed()).toBeTruthy();
-                expect(grid.prop<Core.BaseElement>('pager','refreshBtn').isDisplayed()).toBeTruthy();
+                expect(grid.prop<Core.BaseElement>('pager', 'refreshBtn').isDisplayed()).toBeTruthy();
                 expect(grid.pager.refreshBtn.isDisplayed()).toBeTruthy();
             });
         });
