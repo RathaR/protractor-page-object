@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/RathaR/protractor-page-object#readme",
   "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-typescript": "^2.8.0",
     "lodash": "^3.10.0"
   },
   "devDependencies": {
