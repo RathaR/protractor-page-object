@@ -4,7 +4,7 @@ module KendoUI {
     export class ExamplePage extends Core.BasePage {
         get sideBar() {
             var prop = this.getProperty('sideBar');
-            return new Core.BaseElement({
+            return new SideBar({
                 context: this.element(),
                 locator: prop.locator
             })

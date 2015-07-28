@@ -12,6 +12,23 @@ describe('Kendo grid specs', () => {
         title = page.prop<Core.BaseElement>('exampleView').prop<Core.BaseElement>('title');
     });
 
+    describe('sidebar', () => {
+        var sidebar: KendoUI.SideBar;
+        beforeEach(() => {
+            sidebar = page.sideBar;
+        });
+
+        it('should be displayed', () => {
+            expect(sidebar.isDisplayed()).toBeTruthy();
+        });
+
+        it('list should be displayed', () => {
+            expect(sidebar.list.isDisplayed()).toBeFalsy();
+        });
+
+    });
+
+
     it('should get example view', () => {
         expect(page.prop<Core.BaseElement>('exampleView').isDisplayed()).toBeTruthy();
     });
@@ -24,11 +41,11 @@ describe('Kendo grid specs', () => {
     it('should display grid', () => {
         expect(grid.isDisplayed()).toBeTruthy();
     });
-    it('should get grid header', ()=> {
+    it('should get grid header', () => {
         expect(grid.header.isDisplayed()).toBeTruthy();
     });
 
-    it('should get columns', ()=> {
+    it('should get columns', () => {
         var columns = ['Contact Name', 'Contact Title', 'Company Name', 'Country'];
         var header = grid.header;
         columns.forEach((column, index) => {

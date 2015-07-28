@@ -1,4 +1,4 @@
-xdescribe('Test suite for BaseElement class', () => {
+describe('Test suite for BaseElement class', () => {
     beforeEach(() => {
         browser.get('https://angular-ui.github.io/bootstrap/');
     });
