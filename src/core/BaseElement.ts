@@ -20,8 +20,14 @@ module Core {
             this.properties[id] = prop;
         }
 
-        create<TObject>(constructor: any): TObject {
-            return new constructor({context: this.element()});
+        create<TObject>(constructor: any, params?: Object[]): TObject {
+            //var obj : any  = new Core.BaseElement({context: this.element()});
+            var obj = Object.create(constructor.prototype);
+            params = params || [];
+            params.unshift({context: this.element()});
+            constructor.apply(obj, params);
+            return obj;
+            //return new constructor({context: this.element()});
         }
 
         isDisplayed() {
@@ -56,7 +62,7 @@ module Core {
             };
             var propId = chain.shift();
             var prop = this.getProperty(propId);
-            if(!chain.length) {
+            if (!chain.length) {
                 return new prop.constructor({
                     context: this.element(),
                     locator: prop.locator,

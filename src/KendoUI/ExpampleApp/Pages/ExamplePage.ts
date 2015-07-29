@@ -21,9 +21,9 @@ module KendoUI {
                         locator: by.css('#exampleTitle'),
                         constructor: Core.BaseElement
                     },
-                    'grid' : {
+                    'exampleWrap' : {
                         locator: by.css('#exampleWrap'),
-                        constructor: Grid
+                        constructor: Core.BaseElement
                     }
                 }
             });

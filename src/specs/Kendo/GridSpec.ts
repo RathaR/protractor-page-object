@@ -1,4 +1,4 @@
-///<reference path="../KendoUI/ExpampleApp/KendoApp.ts" />
+///<reference path="../../KendoUI/ExpampleApp/KendoApp.ts" />
 import kendo = KendoUI;
 describe('Kendo grid specs', () => {
     var app: kendo.DemoApp,
@@ -86,7 +86,7 @@ describe('Kendo grid specs', () => {
             var grid: KendoUI.Grid;
 
             beforeEach(()=> {
-                grid = page.prop<KendoUI.Grid>('exampleView', 'grid');
+                grid = page.prop<Core.BaseElement>('exampleView', 'exampleWrap').create<KendoUI.Grid>(KendoUI.Grid);
             });
 
             it('should be displayed', () => {
