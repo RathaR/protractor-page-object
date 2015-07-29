@@ -1,4 +1,4 @@
-///<reference path="../../KendoUI/ExpampleApp/KendoApp.ts" />
+///<reference path="../ExpampleApp/KendoApp.ts" />
 import kendo = KendoUI;
 describe('Kendo grid specs', () => {
     var app: kendo.DemoApp,

@@ -1,4 +1,4 @@
-describe('AngularStrap modal specs', () => {
+describe('Modal specs', () => {
     var modalBtn, modal : AngularStrap.Modal<Core.BaseElement>;
     beforeEach(()=> {
         browser.get('http://mgcrea.github.io/angular-strap/');

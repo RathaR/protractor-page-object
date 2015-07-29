@@ -1,4 +1,4 @@
-///<reference path="../../KendoUI/ExpampleApp/KendoApp.ts" />
+///<reference path="../ExpampleApp/KendoApp.ts" />
 
 describe('DropDownList specs', () => {
     var app: kendo.DemoApp,

@@ -1,4 +1,4 @@
-///<reference path="../Core/BaseElement.ts"/>
+///<reference path="../../Core/BaseElement.ts"/>
 module UIBootstrap {
     export class TabSet<THeader,TContent> extends Core.BaseElement {
 
