@@ -1,5 +1,6 @@
 # Bower dependency directory
  docs/bower_components
+ bower_components
 
 # TypeScript build and typing dir
 build
