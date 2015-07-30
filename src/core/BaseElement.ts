@@ -1,9 +1,14 @@
-///<reference path="../typings/tsd.d.ts" />
 module Core {
+    /**
+     * A BaseElement class is a wrapper around protractor.ElementFinder
+     * and provide base functionality for all elements of application
+     */
     export class BaseElement {
-        private properties: Object;
+
+        private properties: {[index: string]: IObjectProperty};
 
         protected locator: IElementLocator;
+
 
         protected getProperty(id: string) {
             var property = this.properties[id];

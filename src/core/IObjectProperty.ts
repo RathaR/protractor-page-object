@@ -1,4 +1,7 @@
 module Core {
+    /**
+     * describe element child
+     */
     export interface IObjectProperty {
         /**
          * locator for property element finding
