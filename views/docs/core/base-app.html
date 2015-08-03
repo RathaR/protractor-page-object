@@ -1,3 +1,15 @@
-<p>
-    Base application
-</p>
+<h3>
+    Core.Application
+</h3>
+<div class="usage-example">
+<pre>
+    module Demo {
+        export class DemoApp extends Core.App {
+            constructor() {
+                browser.driver.manage().window().maximize();
+                super('http://rathar.github.io/protractor-page-object/#/docs');
+            }
+        }
+    }
+</pre>
+</div>
