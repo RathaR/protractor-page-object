@@ -1,7 +1,13 @@
 <div ng-controller="DocsController">
-    <ul>
-        <li ng-repeat="feature in features">
-            <a href="#/docs/{{feature.link}}">{{feature.text}}</a>
-        </li>
-    </ul>
+    <div>
+        Search: <input ng-model="search">
+    </div>
+    <div ng-repeat="module in modules">
+        <strong>{{module.name}}</strong>
+        <ul>
+            <li ng-repeat="component in module.components | filter:search">
+                <a href="#/docs/{{module.link}}/{{component.link}}">{{component.name}}</a>
+            </li>
+        </ul>
+    </div>
 </div>
