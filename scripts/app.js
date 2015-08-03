@@ -16,6 +16,6 @@ angular.module('app', ['ngRoute'])
                 }
             })
             .otherwise({
-                redirectTo: '/home'
+                redirectTo: '/'
             })
     });
