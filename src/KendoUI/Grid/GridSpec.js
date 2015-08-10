@@ -2,7 +2,7 @@ var kendo = require('KendoUI');
 describe('Kendo grid specs', function () {
     var app, page, title, grid;
     beforeEach(function () {
-        app = new kendo.DemoApp();
+        app = new kendo.App();
         page = app.page('grid', kendo.ExamplePage);
         title = page.prop('exampleView').prop('title');
     });

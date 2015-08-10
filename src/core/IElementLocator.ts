@@ -1,7 +1,6 @@
-module Core {
-    export interface IElementLocator {
-        context : protractor.ElementFinder,
-        locator? : webdriver.Locator,
-        properties?: {[propertyName: string] : IObjectProperty}
-    }
-}
+//module Core {
+//    export interface IElementLocator {
+//        context : protractor.ElementFinder,
+//        locator : webdriver.Locator
+//    }
+//}

@@ -1,39 +1,59 @@
+///<reference path="./IElementLocator.ts" />
+///<reference path="../typings/tsd.d.ts"/>
+
+
 module Core {
+
+    export interface IElementLocator {
+        context : protractor.ElementFinder,
+        locator : webdriver.Locator
+    }
+
+    export interface IElementConstructor<T> {
+        new(locator: (IElementLocator | webdriver.Locator | protractor.ElementFinder), ...args: Object[]): T
+    }
+    export var create = <TObject>(ctor: IElementConstructor<TObject>,
+                                  locator: (IElementLocator | webdriver.Locator | protractor.ElementFinder),
+                                  ctorParams: Object[] = []): TObject => {
+        var obj = Object.create(ctor.prototype);
+        ctorParams.unshift(locator);
+        ctor.apply(obj, ctorParams);
+        return <TObject> obj;
+    };
+
     /**
      * A BaseElement class is a wrapper around protractor.ElementFinder
      * and provide base functionality for all elements of application
      */
     export class BaseElement {
+        //
+        //static create<TObject>(constructor: ElementConstructor, context: protractor.ElementFinder, params?: Object[]) {
+        //    constructor = <any>constructor;
+        //    var obj = Object.create(constructor.prototype);
+        //    params = params || [];
+        //    params.unshift({context: context}); // add locator - first constructor argument
+        //    constructor.apply(obj, params);
+        //    return <TObject> obj;
+        //}
 
-        private properties: {[index: string]: IObjectProperty};
+        //private properties: {[index: string]: IObjectProperty};
 
-        protected locator: IElementLocator;
+        protected locator: any;//(IElementLocator | webdriver.Locator | protractor.ElementFinder);
 
-
-        protected getProperty(id: string) {
-            var property = this.properties[id];
-            if (!property) {
-                throw new Error('Can not find property: ' + id + '. You must use BaseElement.addProperty to add object property configuration');
-            }
-            return property;
-        }
-
-        protected addProperty(id: string, prop: IObjectProperty) {
-            if (this.properties[id]) {
-                throw new Error(id + ' property already exist!');
-            }
-            this.properties[id] = prop;
-        }
-
-        create<TObject>(constructor: any, params?: Object[]): TObject {
-            //var obj : any  = new Core.BaseElement({context: this.element()});
-            var obj = Object.create(constructor.prototype);
-            params = params || [];
-            params.unshift({context: this.element()});
-            constructor.apply(obj, params);
-            return obj;
-            //return new constructor({context: this.element()});
-        }
+        //protected getProperty(id: string) {
+        //    var property = this.properties[id];
+        //    if (!property) {
+        //        throw new Error('Can not find property: ' + id + '. You must use BaseElement.addProperty to add object property configuration');
+        //    }
+        //    return property;
+        //}
+        //
+        //protected addProperty(id: string, prop: IObjectProperty) {
+        //    if (this.properties[id]) {
+        //        throw new Error(id + ' property already exist!');
+        //    }
+        //    this.properties[id] = prop;
+        //}
 
         isDisplayed() {
             return this.element().isDisplayed();
@@ -53,44 +73,40 @@ module Core {
 
         element(sublocator?: webdriver.Locator): protractor.ElementFinder {
             var contextElement;
-            if (!this.locator.context) {
-                contextElement = element(this.locator.locator);
-            } else {
-                contextElement = this.locator.locator ? this.locator.context.element(this.locator.locator) : this.locator.context;
+            var ownLocator = this.locator;
+            if(ownLocator.context && ownLocator.locator) {
+                contextElement = ownLocator.context.element(ownLocator.locator);
+            } else if(ownLocator.using && ownLocator.value) {
+                contextElement = element(ownLocator);
+            } else if(ownLocator.element) {
+                contextElement = ownLocator;
             }
             return sublocator ? contextElement.element(sublocator) : contextElement;
         }
 
-        prop<TProp extends BaseElement>(...chain: string[]): TProp {
-            var call = (object: BaseElement, args) => {
-                return object.prop.apply(object, args);
-            };
-            var propId = chain.shift();
-            var prop = this.getProperty(propId);
-            if (!chain.length) {
-                return new prop.constructor({
-                    context: this.element(),
-                    locator: prop.locator,
-                    properties: prop.properties
-                })
-            } else {
-                return call(new prop.constructor({
-                    context: this.element(),
-                    locator: prop.locator,
-                    properties: prop.properties
-                }), chain);
-            }
-            //return new prop.constructor({context: this.element(), locator: prop.locator, properties: prop.properties});
-        }
+        //prop<TProp>(...chain: string[]): TProp {
+        //    var call = (object: BaseElement, args) => {
+        //        return object.prop.apply(object, args);
+        //    };
+        //    var propId = chain.shift();
+        //    var prop = this.getProperty(propId);
+        //    if (!chain.length) {
+        //        return new prop.constructor({
+        //            context: this.element(),
+        //            locator: prop.locator,
+        //            properties: prop.properties
+        //        })
+        //    } else {
+        //        return call(new prop.constructor({
+        //            context: this.element(),
+        //            locator: prop.locator,
+        //            properties: prop.properties
+        //        }), chain);
+        //    }
+        //}
 
-        constructor(locator: IElementLocator) {
+        constructor(locator: (IElementLocator | webdriver.Locator | protractor.ElementFinder), ...args: Object[]) {
             this.locator = locator;
-            this.properties = Object.create(null);
-            if (locator.properties) {
-                for (var prop in locator.properties) {
-                    this.properties[prop] = locator.properties[prop];
-                }
-            }
         }
     }
 }

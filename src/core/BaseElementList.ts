@@ -1,15 +1,27 @@
 module Core {
 
     export class BaseElementList<TListItem> extends BaseElement {
-        private itemLocator: IListItemLocator;
 
-        private wrapItem(elementFinder: protractor.ElementFinder): TListItem {
-            var ctor = this.itemLocator.constructor;
-            return new ctor({context: elementFinder});
-        }
+        private itemCtor: TListItem;
+        private itemCtorParams: Object[];
+        private itemLocator: any;
+        //private itemLocator: (IElementLocator | webdriver.Locator | protractor.ElementFinder);
 
-        all(): protractor.ElementArrayFinder {
-            return this.element().all(this.itemLocator.locator);
+        //private wrapItem(elementFinder: protractor.ElementFinder): TListItem {
+        //    var ctor = this.itemLocator.constructor;
+        //    return new ctor({context: elementFinder}, this.itemLocator );
+        //}
+
+        all(subLocator?: webdriver.Locator) {
+            var contextEl: protractor.ElementFinder, locator: webdriver.Locator;
+            if (this.itemLocator.locator && this.itemLocator.context) {
+                contextEl = this.itemLocator.context;
+                locator = this.itemLocator.locator;
+            } else if (this.itemLocator.using) {
+                contextEl = this.element();
+                locator = this.itemLocator;
+            }
+            return subLocator ? contextEl.all(locator).all(subLocator) : contextEl.all(locator);
         }
 
         asText() {
@@ -22,23 +34,25 @@ module Core {
             return this.all().count();
         }
 
-        get(index: number): TListItem {
-            var element = this.all().get(index);
-            return this.wrapItem(element);
+        get(index: number) {
+            var context = this.all().get(index);
+            return Core.create<TListItem>(this.itemLocator.constructor, context, this.itemLocator.params);
         }
 
-        toArray(): webdriver.promise.Promise<TListItem[]> {
-            var finders = this.all().asElementFinders_();
-            return finders.then((finders) => {
-                return finders.map((elementFinder) => {
-                    return this.wrapItem(elementFinder)
-                });
-            });
-        }
+        //toArray(): webdriver.promise.Promise<TListItem[]> {
+        //    var finders = this.all().asElementFinders_();
+        //    return finders.then((finders) => {
+        //        return finders.map((elementFinder) => {
+        //            return this.wrapItem(elementFinder)
+        //        });
+        //    });
+        //}
 
-        constructor(locator: IElementLocator, itemLocator: IListItemLocator) {
+        constructor(locator: (IElementLocator | webdriver.Locator), ...args: Object[]) {
             super(locator);
-            this.itemLocator = itemLocator;
+            this.itemCtor = args[0];
+            this.itemLocator = <(IElementLocator | webdriver.Locator)>args[1];
+            this.itemCtorParams = args.slice(2);
         }
     }
 }

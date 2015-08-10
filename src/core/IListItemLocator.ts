@@ -1,6 +1,7 @@
-module Core {
-    export interface IListItemLocator {
-        locator: webdriver.Locator,
-        constructor: any
-    }
-}
+//module Core {
+//    export interface IListItemLocator<TItem> {
+//        locator: webdriver.Locator,
+//        constructor: TItem,
+//        params?: Object[]
+//    }
+//}
