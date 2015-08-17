@@ -1,6 +1,4 @@
-///<reference path="./IElementLocator.ts" />
 ///<reference path="../typings/tsd.d.ts"/>
-
 
 module Core {
 
@@ -10,14 +8,14 @@ module Core {
     }
 
     export interface IElementConstructor<T> {
-        new(locator: (IElementLocator | webdriver.Locator | protractor.ElementFinder), ...args: Object[]): T
+        new(locator: (IElementLocator | webdriver.Locator | protractor.ElementFinder), ...args: any[]): T
     }
-    export var create = <TObject>(ctor: IElementConstructor<TObject>,
-                                  locator: (IElementLocator | webdriver.Locator | protractor.ElementFinder),
-                                  ctorParams: Object[] = []): TObject => {
-        var obj = Object.create(ctor.prototype);
+    export var create = <TObject>(ctorFn: IElementConstructor<TObject>,
+                                  locator: protractor.ElementFinder,
+                                  ctorParams: any[] = []): TObject => {
+        var obj = Object.create(ctorFn.prototype);
         ctorParams.unshift(locator);
-        ctor.apply(obj, ctorParams);
+        ctorFn.apply(obj, ctorParams);
         return <TObject> obj;
     };
 
@@ -26,34 +24,8 @@ module Core {
      * and provide base functionality for all elements of application
      */
     export class BaseElement {
-        //
-        //static create<TObject>(constructor: ElementConstructor, context: protractor.ElementFinder, params?: Object[]) {
-        //    constructor = <any>constructor;
-        //    var obj = Object.create(constructor.prototype);
-        //    params = params || [];
-        //    params.unshift({context: context}); // add locator - first constructor argument
-        //    constructor.apply(obj, params);
-        //    return <TObject> obj;
-        //}
-
-        //private properties: {[index: string]: IObjectProperty};
 
         protected locator: any;//(IElementLocator | webdriver.Locator | protractor.ElementFinder);
-
-        //protected getProperty(id: string) {
-        //    var property = this.properties[id];
-        //    if (!property) {
-        //        throw new Error('Can not find property: ' + id + '. You must use BaseElement.addProperty to add object property configuration');
-        //    }
-        //    return property;
-        //}
-        //
-        //protected addProperty(id: string, prop: IObjectProperty) {
-        //    if (this.properties[id]) {
-        //        throw new Error(id + ' property already exist!');
-        //    }
-        //    this.properties[id] = prop;
-        //}
 
         isDisplayed() {
             return this.element().isDisplayed();
@@ -84,28 +56,7 @@ module Core {
             return sublocator ? contextElement.element(sublocator) : contextElement;
         }
 
-        //prop<TProp>(...chain: string[]): TProp {
-        //    var call = (object: BaseElement, args) => {
-        //        return object.prop.apply(object, args);
-        //    };
-        //    var propId = chain.shift();
-        //    var prop = this.getProperty(propId);
-        //    if (!chain.length) {
-        //        return new prop.constructor({
-        //            context: this.element(),
-        //            locator: prop.locator,
-        //            properties: prop.properties
-        //        })
-        //    } else {
-        //        return call(new prop.constructor({
-        //            context: this.element(),
-        //            locator: prop.locator,
-        //            properties: prop.properties
-        //        }), chain);
-        //    }
-        //}
-
-        constructor(locator: (IElementLocator | webdriver.Locator | protractor.ElementFinder), ...args: Object[]) {
+        constructor(locator: (IElementLocator | webdriver.Locator | protractor.ElementFinder)) {
             this.locator = locator;
         }
     }
